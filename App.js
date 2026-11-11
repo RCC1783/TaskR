@@ -3,16 +3,12 @@ import HomeScreen from './src/screens/HomeScreen';
 import LoginScreen from './src/screens/LoginScreen';
 
 // Modules
-import { StatusBar } from 'expo-status-bar';
-import { Text, View } from 'react-native';
-import { SafeAreaView, SafeAreaProvider, SafeAreaInsetsContext, useSafeAreaInsets } from 'react-native-safe-area-context';
-import { styles } from './src/styles';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { useFonts } from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
 import { useEffect } from 'react';
-import { requestFormReset } from 'react-dom';
 
 /* Copy & paste in your terminal to install these to your project folder:
 - npx expo install react-native-screens react-native-safe-area-context
@@ -57,5 +53,5 @@ export default function App() {
 
 /*
 ###   Resources used
-- For use font: https://docs.expo.dev/develop/user-interface/fonts/#with-usefonts-hook
+- For use font loading: https://docs.expo.dev/develop/user-interface/fonts/#with-usefonts-hook
 */

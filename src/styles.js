@@ -3,9 +3,10 @@ import { StyleSheet } from "react-native";
 export const styles = StyleSheet.create({
     viewportContainer: {
         flex: 1,
+        flexDirection: 'column',
         backgroundColor: "#ffff",
         paddingHorizontal: 25,
-        paddingVertical: 40,
+        paddingVertical: 20,
         gap: 10,
     },
 
@@ -26,14 +27,20 @@ export const styles = StyleSheet.create({
     h1: {
         fontSize: 24,
         fontFamily: "comfortaa",
-        fontWeight: 'bold'
+        fontWeight: 'bold',
+        color: '#454545'
     },
     h2: {
-        fontSize: 24,
+        fontSize: 20,
         fontFamily: "comfortaa",
         fontWeight: 'semibold'
     },
 
+    hr: {
+        borderColor: '#000',
+        borderBottomWidth: 1,
+        borderRadius: 5
+    },
     textInput: {
         placeholder: {
             colour: '#565656'
@@ -43,11 +50,7 @@ export const styles = StyleSheet.create({
         fontFamily: "comfortaa",
         // textAlign: 'center',
 
-        shadowOpacity: 0.15,
-        shadowRadius: 5,
-        shadowColor: "#000",
-        shadowOffset: {width: 0, height: 1},
-        elevation: 5,
+        boxShadow: '0 1px 5px 0 rgba(0, 0, 0, 0.15) inset',
 
         borderRadius: 25,
 
@@ -82,7 +85,6 @@ export const styles = StyleSheet.create({
         maxWidth: 400
     },
     linkStyle: {
-        fontSize: 16,
         fontFamily: "comfortaa",
         fontWeight: 'bold',
         color: '#6C95C2'
@@ -90,24 +92,29 @@ export const styles = StyleSheet.create({
 
     taskBlock: {
         date: {
-            fontSize: 12,
+            fontSize: 13,
             fontFamily: "comfortaa",
         },
         title: {
-            fontSize: 16,
+            fontSize: 20,
             fontFamily: "comfortaa",
             fontWeight: 'bold',
             
         },
         description: {
-            fontSize: 13,
+            fontSize: 14,
             fontFamily: "comfortaa",
         },
         editButton: {
-            fontSize: 13,
+            fontSize: 14,
             fontFamily: "comfortaa",
-            fontWeight: "semibold"
+            fontWeight: "bold",
+            color: "#6C95C2",
+
+            width: '100%',
+            textAlign: 'right'
         },
+
 
         backgroundColor: '#ffff',
         shadowOpacity: 0.15,
@@ -120,8 +127,34 @@ export const styles = StyleSheet.create({
 
         paddingHorizontal: 20,
         paddingVertical: 10,
+        maxWidth: 500,
+    },
 
-        gap: 5,
+    navMenu: {
+        text: {
+            fontSize: 14,
+            fontFamily: "comfortaa",
+            fontWeight: 'bold'
+        },
+        // flex: 1,
+        flexDirection: 'row',
+        justifyContent: 'space-evenly',
+        alignItems: 'center',
+        
+        paddingHorizontal: 20,
+        paddingVertical: 10,
+        borderRadius: 25,
+
+        boxShadow: '0 1px 5px 0 rgba(0, 0, 0, 0.15)',
+    },
+
+    devUserIcon: {
+        backgroundColor: '#c4c4c4',
+        borderRadius: 25,
+        width: 50,
+        height: 50,
+        position: 'absolute',
+        right: 20,
+        top: 15
     }
-
 });

@@ -29,5 +29,5 @@ export default function LoginScreen({navigation}){
                 <Text style={styles.linkStyle}>Create Account</Text>
             </Pressable>
         </SafeAreaView>
-    )
+    );
 }
