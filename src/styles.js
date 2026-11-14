@@ -52,6 +52,7 @@ export const styles = StyleSheet.create({
             colour: '#E0AAFF'
         },
 	backgroundColor: "#240046",
+	color: '#C77DFF',
 
         fontSize: 16,
         fontFamily: "comfortaa",
