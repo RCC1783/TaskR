@@ -3,12 +3,11 @@ import { StyleSheet } from "react-native";
 export const styles = StyleSheet.create({
     viewportContainer: {
 	homeScreen: {
-	backgroundColor: "#10002B",
 	backgroundImage: "linear-gradient(159deg,rgba(16, 0, 43, 1) 0%, #330A5C 50%, #10002B 100%)"
 	},
+	backgroundColor: "#10002B",
         flex: 1,
         flexDirection: 'column',
-        backgroundColor: "#ffffff",
         paddingHorizontal: 25,
         paddingVertical: 20,
         gap: 10,
@@ -34,16 +33,17 @@ export const styles = StyleSheet.create({
         fontSize: 24,
         fontFamily: "comfortaa",
         fontWeight: 'bold',
-        color: '#454545'
+	color: "#9D4EDD"
     },
     h2: {
         fontSize: 20,
         fontFamily: "comfortaa",
-        fontWeight: 'semibold'
+        fontWeight: 'semibold',
+	color: "#9D4EDD"
     },
 
     hr: {
-        borderColor: '#000',
+        borderColor: '#7B2CBF',
         borderBottomWidth: 1,
         borderRadius: 5
     },
@@ -125,14 +125,14 @@ export const styles = StyleSheet.create({
             fontSize: 14,
             fontFamily: "comfortaa",
             fontWeight: "bold",
-            color: "#6C95C2",
+            color: "#7B2CBF",
 
             width: '100%',
             textAlign: 'right'
         },
 
 
-        backgroundColor: '#ffff',
+        backgroundColor: '#C77DFF',
         shadowOpacity: 0.15,
         shadowRadius: 5,
         shadowColor: "#000",
@@ -150,18 +150,24 @@ export const styles = StyleSheet.create({
         text: {
             fontSize: 14,
             fontFamily: "comfortaa",
-            fontWeight: 'bold'
+            fontWeight: 'bold',
+	    color: "#9D4EDD"
         },
         // flex: 1,
         flexDirection: 'row',
         justifyContent: 'space-evenly',
         alignItems: 'center',
+	backgroundColor: "#240046",
+	borderRadius: '1em',
+	borderStyle: 'solid',
+	borderWidth: '1px',
+	borderColor: '#5A189A',
         
         paddingHorizontal: 20,
         paddingVertical: 10,
         borderRadius: 25,
 
-        boxShadow: '0 1px 5px 0 rgba(0, 0, 0, 0.15)',
+        boxShadow: '0 0 4px 2px #5a189a inset',
     },
 
     devUserIcon: {

@@ -1,12 +1,17 @@
 import { Text, View, Pressable, } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { useState } from 'react';
 
 import { styles } from "../styles";
 import { NavMenu } from "../../navMenu";
 
 export default function HomeScreen({navigation}){
     // const navigation = useNavigation();
+    const [isHover, setHover] = useState(false);
+    const [isPressed, setPress] = useState(false);
+    const buttonPress = isPressed ? styles.button.pressed : 0; 
+    const buttonState = isHover ? (isPressed ? buttonPress : styles.button.idle) : 0;	
 
     return (
         <SafeAreaView style={styles.viewportContainer}>
@@ -28,7 +33,12 @@ export default function HomeScreen({navigation}){
                 </Pressable>
             </View>
             <View style={styles.hr}/>
-            <Pressable style={styles.button}>
+            <Pressable style={[styles.button, buttonState]}
+	        onHoverIn={() => setHover(true)}
+	        onHoverOut={() => {setHover(false); setPress(false)}}
+		onPressIn={() => setPress(true)}
+	    	onPress={() => {setPress(false); navigation.navigate('home')}}
+	    >
                 <Text style={styles.button.text}>New Task</Text>
             </Pressable>
             <NavMenu navigation={navigation}/>

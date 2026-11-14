@@ -30,7 +30,7 @@ export default function LoginScreen({navigation}){
             />
             <Pressable style={[styles.button, buttonState]} 
 	        onHoverIn={() => setHover(true)}
-	        onHoverOut={() => setHover(false)}
+	        onHoverOut={() => {setHover(false); setPress(false)}}
 		onPressIn={() => setPress(true)}
 	    	onPress={() => {setPress(false); navigation.navigate('home')}}
 	    >
