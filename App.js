@@ -24,6 +24,7 @@ const Stack = createNativeStackNavigator();
 SplashScreen.preventAutoHideAsync();
 
 export default function App() {
+	const test = "testing merge";
   const [loaded, error] = useFonts({
     'comfortaa': require('./assets/fonts/Comfortaa/Comfortaa-VariableFont_wght.ttf'),
     'calSans': require('./assets/fonts/Cal_Sans/CalSans-Regular.ttf'),
