@@ -7,21 +7,26 @@ import { styles } from "../styles";
 import { NavMenu } from "../../navMenu";
 
 export default function HomeScreen({navigation}){
+<<<<<<< HEAD
     // const navigation = useNavigation();
     const [isHover, setHover] = useState(false);
     const [isPressed, setPress] = useState(false);
     const buttonPress = isPressed ? styles.button.pressed : 0; 
     const buttonState = isHover ? (isPressed ? buttonPress : styles.button.idle) : 0;	
+=======
+
+    let date = new Date();
+>>>>>>> master
 
     return (
         <SafeAreaView style={styles.viewportContainer}>
             <View style={[{height: 0}]}><View style={styles.devUserIcon}/></View>
             <Text style={styles.h1}>Today is</Text>
-            <Text style={styles.h2}>Monday June 16, 2026</Text>
+            <Text style={styles.h2}>{date.toDateString()}</Text>
             
             <View style={styles.hr}/>
 
-            <Text style={styles.h2}>Due Soon</Text>
+            <Text style={styles.h2}>Upcoming</Text>
 
             {/* Just for testing - will be populated with a real task later*/}
             <View style={styles.taskBlock}>
@@ -41,6 +46,8 @@ export default function HomeScreen({navigation}){
 	    >
                 <Text style={styles.button.text}>New Task</Text>
             </Pressable>
+
+            {/* I want this to be at the bottom of the screen but was encountering issues lol */}
             <NavMenu navigation={navigation}/>
         </SafeAreaView>
     );
