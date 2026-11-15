@@ -7,16 +7,13 @@ import { styles } from "../styles";
 import { NavMenu } from "../../navMenu";
 
 export default function HomeScreen({navigation}){
-<<<<<<< HEAD
     // const navigation = useNavigation();
     const [isHover, setHover] = useState(false);
     const [isPressed, setPress] = useState(false);
     const buttonPress = isPressed ? styles.button.pressed : 0; 
     const buttonState = isHover ? (isPressed ? buttonPress : styles.button.idle) : 0;	
-=======
 
     let date = new Date();
->>>>>>> master
 
     return (
         <SafeAreaView style={styles.viewportContainer}>
