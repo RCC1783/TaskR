@@ -75,16 +75,16 @@ export const styles = StyleSheet.create({
             textAlign: 'center',
             color: '#ffff',
         },
-	idle: {
+	hover: {
             backgroundColor: '#9D4EDD'
 	},
 	pressed: {
-	    backgroundColor: '#ffffff',
+	    backgroundColor: '#5A189A',
 	    transition: 'background-color 0s'
 	},
 
         backgroundColor: '#7B2CBF',
-	transition: 'background-color 1s',
+	transition: 'background-color 0.25s',
 
         shadowOpacity: 0.15,
         shadowRadius: 5,
