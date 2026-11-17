@@ -1,14 +1,45 @@
-import { Text, View, Pressable, } from "react-native";
+import { Text, View, Pressable, FlatList, } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { InteractivePressable } from "../modules/InteractivePressable"
 
 import { styles } from "../styles";
 import { NavMenu } from "../../navMenu";
+import { useEffect, useState } from "react";
+import { collection, getDocs, Timestamp } from "firebase/firestore";
+import { firestoreDB } from "../firebaseConfig";
+
+class Task {
+    description = "no description provided";
+    dueDate = new Date().getUTCDate();
+    constructor(description){
+        this.description = description;
+    }
+}
+
+async function GetTasks(){
+    const querySnapshot = await getDocs(collection(firestoreDB, "test"));
+
+    let allDocs = [];
+    querySnapshot.forEach((doc) => {
+        allDocs.push({
+            ...doc.data(),
+            id: doc.id
+        });
+    });
+    
+    return allDocs;
+}
 
 export default function HomeScreen({navigation}){
     // const navigation = useNavigation();
     let date = new Date();
+
+    const [taskList, setTaskList] = useState([]);
+
+    useEffect(() => {
+        GetTasks().then(result => { setTaskList(result); })
+    }, []);
 
     return (
         <SafeAreaView style={styles.viewportContainer}>
@@ -34,6 +65,19 @@ export default function HomeScreen({navigation}){
 	    	style={styles.button} 
 	    	text={"New Task"} 
 	    />
+        <FlatList
+            data={taskList}
+            keyExtractor={item => item.id}
+            renderItem={({item}) => (
+                <View style={styles.taskBlock}>
+                    {/* Firebase dates use a custom timestamp class that is a bit inconvenient. For now
+                        I have it working but using strings or a numeric format might be better. */}
+                    <Text style={styles.taskBlock.date}>{item.dueDate.toDate().toLocaleString()}</Text>
+                    <Text style={styles.taskBlock.title}>{item.id}</Text>
+                    <Text style={styles.taskBlock.description}>{item.description}</Text>
+                </View>
+            )}
+        />
             {/* I want this to be at the bottom of the screen but was encountering issues lol */}
             <NavMenu navigation={navigation}/>
         </SafeAreaView>
