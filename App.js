@@ -13,7 +13,7 @@ import { useEffect } from 'react';
 /* Copy & paste in your terminal to install these to your project folder:
 - npx expo install react-native-screens react-native-safe-area-context
 - npm install @react-navigation/native @react-navigation/native-stack
-- npx expo install expo-file-system
+- npx expo install @react-native-async-storage/async-storage
 - npx expo install firebase
 - npx expo install expo-camera
 - npx expo install expo-font expo-splash-screen
