@@ -157,7 +157,7 @@ export const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-evenly',
         alignItems: 'center',
-	backgroundColor: "#240046",
+	backgroundColor: "#3C096C",
 	borderRadius: '1em',
 	borderStyle: 'solid',
 	borderWidth: '1px',
@@ -178,5 +178,56 @@ export const styles = StyleSheet.create({
         position: 'absolute',
         right: 20,
         top: 15
-    }
+    },
+
+    calender: {
+	timeStamp: {
+		color: '#7B2CBF',
+		fontSize: "0.8em",
+		minWidth: "5%",
+		flexShrink: 1,
+	},
+        tsContainer: {
+		display: "flex",
+		flexDirection: "row",
+		alignItems: "center",
+		textAlign: "left"
+        },
+	daySeperator: {
+		borderBottomWidth: 3,
+		borderColor: "#9D4EDD",
+		borderRadius: 1
+	},
+	header: {
+		marginLeft: "5%",
+		display: "flex",
+		flexDirection: "row",
+		paddingTop: "0.6em",
+		paddingBottom: "0.6em",
+
+	},
+	taskContainer: {
+		paddingTop: "1em",
+		paddingBottom: "1em",
+		flexGrow: 2, 
+		flexShrink: 2,
+		flexBasis: "0px",
+		curDay: {
+			backgroundColor: "#240046",
+		},
+	},
+	headerLabels: {
+		flexGrow: 2, 
+		flexShrink: 2,
+		flexBasis: "0px",
+		fontSize: "1em",
+		textAlign: "center",
+		color: "#9D4EDD",
+		curDay: {
+			color: "#C77DFF",
+			fontWeight: "bold"
+		}
+	}
+
+    },
 });

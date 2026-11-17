@@ -2,6 +2,7 @@ import { Text, View, Pressable, } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { InteractivePressable } from "../modules/InteractivePressable"
+import { Calender } from "../modules/Calender"
 
 import { styles } from "../styles";
 import { NavMenu } from "../../navMenu";
@@ -36,6 +37,7 @@ export default function HomeScreen({navigation}){
 	    />
             {/* I want this to be at the bottom of the screen but was encountering issues lol */}
             <NavMenu navigation={navigation}/>
+	    <Calender/>
         </SafeAreaView>
     );
 }
