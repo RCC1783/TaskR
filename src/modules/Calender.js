@@ -21,9 +21,9 @@ function TaskContainer({curDay, day}) {
 function CalenderHeader({curDay, days}) {
 	return (
 		<View style={styles.calender.header}>
-			{days.map(day => {
+			{days.map((day, index) => {
 				const styleCurDay = (curDay===day) ? styles.calender.headerLabels.curDay : 0;
-				return (<Text style={[styles.calender.headerLabels, styleCurDay]}>{day}</Text>);
+				return (<Text key={index} style={[styles.calender.headerLabels, styleCurDay]}>{day}</Text>);
 			})}
 		</View>
 	);
@@ -56,10 +56,11 @@ export function Calender() {
 			t = 12;
 		}
 		timestamps.push((<TimeStamp 
+			key={i}
 			nextDay={((startHour+i)%24==23) ? styles.calender.daySeperator : {}} 
 			current={((startHour+i)%24==curHour) ? {color: "#C77DFF", fontWeight: "bold", fontSize: "0.9em"} : {}}
 			time={t+":00 "+suffix}
-			children={days.map(day =>{return (<TaskContainer curDay={days[curDay]} day={day}/>)})}
+			children={days.map((day, index) =>{return (<TaskContainer key={index} curDay={days[curDay]} day={day}/>)})}
 			/>));
 	}
 
