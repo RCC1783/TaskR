@@ -1,6 +1,6 @@
 import { Text, View, Pressable, } from "react-native";
 import { styles } from "../styles";
-import { TaskType, TaskStatus } from "../modules/Task";
+import { TaskType, TaskStatus, insertTasksForDayAndHour } from "../modules/Task";
 function TimeStamp({time, children, nextDay, current}) {
 	return (
 		<View style={[styles.hr, styles.calender.tsContainer, nextDay]}>
@@ -9,11 +9,11 @@ function TimeStamp({time, children, nextDay, current}) {
 		</View>
 	);
 }
-function TaskContainer({curDay, day}) {
+function TaskContainer({curDay, day, stamp}) {
 	const curDayStyle = (curDay === day) ? styles.calender.taskContainer.curDay : 0;
 	return (
 		<View style={[styles.calender.taskContainer, curDayStyle]}>
-			<Text style={{color:"#E0AAFF"}}></Text>		
+			{insertTasksForDayAndHour(day - curDay, stamp)}
 		</View>
 	);
 
@@ -28,26 +28,34 @@ function CalenderHeader({curDay, days}) {
 		</View>
 	);
 }
-// some example tasks
-const tasks = [
-		{name: "Homework", description: "Math Homework", type: TaskType.DUE_DATE, length: -1, start: Date.UTC(26, 10, 16, 10), end: -1, taskStatus: TaskStatus.INCOMPLETE },
-		{name: "Group Meeting", description: "Business Planning Group Meeting for Project 2", type: TaskType.EVENT, start: Date.UTC(26, 10, 17, 12), end: Date.UTC(26, 10, 17, 13, 30), taskStatus: TaskStatus.INCOMPLETE },
-		{name: "Laundry Day", description: "Do your laundry!!!!", type: TaskType.REMINDER, length: -1, start: Date.UTC(26, 10, 15, 11), end: -1, taskStatus: TaskStatus.COMPLETE }
-		];
 
 export function Calender() {
 	const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 	const curDay = new Date(Date.now()).getDay();
 	const curHour = new Date(Date.now()).getHours();
+	const curDate = new Date(Date.now()).getDate();
+	const curMonth = new Date(Date.now()).getMonth();
+	const curYear = new Date(Date.now()).getFullYear();
+
+	const curUnixTimeStamp = Date.now();
+	const unixTimeHourDelta = Date.UTC(2000, 0, 1, 2, 0) - Date.UTC(2000, 0, 1, 1, 0);
+	let timeStampUnixTimeDate = curUnixTimeStamp - unixTimeHourDelta * 2;
 	let startHour = curHour - 2;
 	if (startHour < 0) {
+		if (curHour === 0) {
+			timeStampUnixTimeDate = curUnixTimeStamp;
+		}
+		if (curHour === 1) {
+			timeStampUnixTimeDate = curUnixTimeStamp - unixTimeHourDelta;
+		}
 		startHour = 0;
 	}
 	let timestamps = [];
 	let suffix = "AM";
 	for (let i=0; i<12; i++) {
 		let t = (startHour+i) % 12;
-		if ((startHour+i)%24 > 11 && (startHour+i)%24 != 0) {
+		let ot = (startHour+i) % 24;
+		if (ot > 11 && ot != 0) {
 			suffix = "PM";
 		} else {
 			suffix = "AM";
@@ -57,11 +65,12 @@ export function Calender() {
 		}
 		timestamps.push((<TimeStamp 
 			key={i}
-			nextDay={((startHour+i)%24==23) ? styles.calender.daySeperator : {}} 
-			current={((startHour+i)%24==curHour) ? {color: "#C77DFF", fontWeight: "bold", fontSize: "0.9em"} : {}}
+			nextDay={(ot==23) ? styles.calender.daySeperator : {}} 
+			current={(ot==curHour) ? {color: "#C77DFF", fontWeight: "bold", fontSize: "0.9em"} : {}}
 			time={t+":00 "+suffix}
-			children={days.map((day, index) =>{return (<TaskContainer key={index} curDay={days[curDay]} day={day}/>)})}
+			children={days.map((day, index) =>{return (<TaskContainer key={index} stamp={timeStampUnixTimeDate} day={index} curDay={curDay}/>)})}
 			/>));
+		timeStampUnixTimeDate += unixTimeHourDelta;
 	}
 
 	return (

@@ -191,7 +191,7 @@ export const styles = StyleSheet.create({
 		display: "flex",
 		flexDirection: "row",
 		alignItems: "center",
-		textAlign: "left"
+		textAlign: "left",
         },
 	daySeperator: {
 		borderBottomWidth: 3,
@@ -212,6 +212,8 @@ export const styles = StyleSheet.create({
 		flexGrow: 2, 
 		flexShrink: 2,
 		flexBasis: "0px",
+		maxWidth: "calc(100% / 7)",
+		height: "100%",
 		curDay: {
 			backgroundColor: "#240046",
 		},
@@ -223,6 +225,7 @@ export const styles = StyleSheet.create({
 		fontSize: "1em",
 		textAlign: "center",
 		color: "#9D4EDD",
+		maxWidth: "calc(100% / 7)",
 		curDay: {
 			color: "#C77DFF",
 			fontWeight: "bold"
@@ -230,4 +233,28 @@ export const styles = StyleSheet.create({
 	}
 
     },
+    calTask: {
+    	taskHeader: {
+		backgroundColor: "red",
+		fontSize: "0.7em",
+        	borderRadius: "0.8em",
+		paddingLeft: "0.5em",
+            	fontFamily: "comfortaa",
+		color: "#10002B",
+	},
+    	completed: {
+		backgroundColor: "green"
+	},
+	titleText: {
+            	fontFamily: "comfortaa",
+		fontStyle: "bold",
+		fontSize: "1em",
+		color: "black",
+	},
+	margin: 0,
+        backgroundColor: '#C77DFF',
+        borderRadius: "1em",
+        paddingHorizontal: "0.5em",
+        paddingVertical: "0.25em",
+    }
 });
