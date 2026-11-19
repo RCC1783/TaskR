@@ -210,6 +210,7 @@ export const styles = StyleSheet.create({
 		flexDirection: "row",
 		paddingTop: 2,
 		paddingBottom: 2,
+		paddingLeft: "10%",
 
 	},
 	taskContainer: {
