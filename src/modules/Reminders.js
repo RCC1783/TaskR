@@ -2,6 +2,8 @@ import { useEffect, useRef } from "react";
 import { Platform } from "react-native";
 import * as Notifications from "expo-notifications";
 
+let channelReady = false;
+
 const CHANNEL_ID = "reminders";
 
 Notifications.setNotificationHandler({
@@ -19,10 +21,19 @@ export function shouldSendReminder(date){
 
 async function requestPermission(){
     if(Platform.OS === "android"){
-        await Notifications.setNotificationChannelAsync(CHANNEL_ID, {
-            name: "Reminders",
-            importance: Notifications.AndroidImportance.HIGH,
-        });
+        try{
+            await Notifications.setNotificationChannelAsync(CHANNEL_ID, {
+                name: "Reminders",
+                importance: Notifications.AndroidImportance.HIGH,
+                sound: "default",
+                vibrationPattern: [0, 250, 250, 250],
+                lightColor: "#7B2CBF",
+            });
+            channelReady = true;
+        }
+        catch(error){
+            console.warn(error);
+        }
     }
 
     const current = await Notifications.getPermissionsAsync();
@@ -42,7 +53,7 @@ async function sendReminder(date){
             title: "TaskR",
             body: "It's " + time,
         },
-        trigger: { channelId: CHANNEL_ID },
+        trigger: channelReady ? { channelId: CHANNEL_ID } : null,
     });
 }
 
