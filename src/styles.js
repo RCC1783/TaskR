@@ -164,14 +164,6 @@ export const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-evenly',
         alignItems: 'center',
-<<<<<<< HEAD
-	backgroundColor: "#3C096C",
-	borderRadius: '1em',
-	borderStyle: 'solid',
-	borderWidth: 1,
-	borderColor: '#5A189A',
-=======
->>>>>>> master
         
         backgroundColor: "rgba(41, 26, 65, 0.95)",
         borderRadius: 16,
@@ -198,14 +190,9 @@ export const styles = StyleSheet.create({
     calender: {
 	timeStamp: {
 		color: '#7B2CBF',
-<<<<<<< HEAD
 		fontSize: 12,
 		minWidth: "10%",
 		maxWidth: "10%",
-=======
-		fontSize: 12.8,
-		minWidth: "5%",
->>>>>>> master
 		flexShrink: 1,
 	},
         tsContainer: {
