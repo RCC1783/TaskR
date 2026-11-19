@@ -11,6 +11,7 @@ export const styles = StyleSheet.create({
         paddingHorizontal: 25,
         paddingVertical: 20,
         gap: 10,
+        overflow: 'scroll'
     },
 
     container: {
