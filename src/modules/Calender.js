@@ -12,7 +12,7 @@ function TimeStamp({time, children, nextDay, current}) {
 function TaskContainer({curDay, day, stamp}) {
 	const curDayStyle = (curDay === day) ? styles.calender.taskContainer.curDay : 0;
 	const tasks = insertTasksForDayAndHour(day-curDay, stamp);
-	const shrinkPadding = (tasks.length != 0) ? {padding: "0em"} : 0;
+	const shrinkPadding = (tasks.length != 0) ? {padding: 0} : 0;
 	return (
 		<View style={[styles.calender.taskContainer, curDayStyle, shrinkPadding]}>
 			{insertTasksForDayAndHour(day - curDay, stamp)}
@@ -59,7 +59,7 @@ export function Calender() {
 		timestamps.push((<TimeStamp 
 			key={i}
 			nextDay={(ot==23) ? styles.calender.daySeperator : {}} 
-			current={(ot==curHour) ? {color: "#C77DFF", fontWeight: "bold", fontSize: 14} : {}}
+			current={(ot==curHour) ? {color: "#C77DFF", fontWeight: "bold", fontSize: 14.4} : {}}
 			time={t+":00 "+suffix}
 			children={days.map((day, index) =>{return (<TaskContainer key={index} stamp={timeStampUnixTimeDate} day={index} curDay={curDay}/>)})}
 			/>));
