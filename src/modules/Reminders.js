@@ -20,7 +20,6 @@ export function shouldSendReminder(date){
 }
 
 async function requestPermission(){
-    // Android needs a channel before the permission prompt will show
     if(Platform.OS === "android"){
         try{
             await Notifications.setNotificationChannelAsync(CHANNEL_ID, {
@@ -54,7 +53,6 @@ async function sendReminder(date){
             title: "TaskR",
             body: "It's " + time,
         },
-        // No time trigger so it goes out right away
         trigger: channelReady ? { channelId: CHANNEL_ID } : null,
     });
 }
