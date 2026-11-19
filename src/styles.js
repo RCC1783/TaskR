@@ -187,82 +187,179 @@ export const styles = StyleSheet.create({
         top: 15
     },
 
-    calender: {
-	timeStamp: {
-		color: '#7B2CBF',
-		fontSize: 12,
-		minWidth: "10%",
-		maxWidth: "10%",
-		flexShrink: 1,
-	},
-        tsContainer: {
-		display: "flex",
-		flexDirection: "row",
-		alignItems: "center",
-		textAlign: "left",
-        },
-	daySeperator: {
-		borderBottomWidth: 3,
-		borderColor: "#9D4EDD",
-		borderRadius: 1
-	},
-	header: {
-		flexDirection: "row",
-		paddingTop: 2,
-		paddingBottom: 2,
-		paddingLeft: "10%",
-
-	},
-	taskContainer: {
-		paddingTop: 4,
-		paddingBottom: 4,
-		flexGrow: 2, 
-		flexShrink: 2,
-		flexBasis: "0px",
-		maxWidth: "calc(100% / 7)",
-		height: "100%",
-		curDay: {
-			backgroundColor: "#240046",
+    calenderStyles: {
+	    isMobile: false,
+	    calender: {
+		timeStamp: {
+			color: '#7B2CBF',
+			fontSize: 18,
+			minWidth: "10%",
+			maxWidth: "10%",
+			flexShrink: 1,
 		},
-	},
-	headerLabels: {
-		flexGrow: 2, 
-		flexShrink: 2,
-		flexBasis: "0px",
-		fontSize: 12,
-		textAlign: "center",
-		color: "#9D4EDD",
-		maxWidth: "calc(100% / 7)",
-		curDay: {
-			color: "#C77DFF",
-			fontWeight: "bold"
-		}
-	},
+		currentTime: {color: "#C77DFF", fontWeight: "bold", fontSize: 20},
+		tsContainer: {
+			display: "flex",
+			flexDirection: "row",
+			alignItems: "center",
+			textAlign: "left",
+		},
+		daySeperator: {
+			borderBottomWidth: 3,
+			borderColor: "#9D4EDD",
+			borderRadius: 1
+		},
+		header: {
+			flexDirection: "row",
+			paddingTop: 2,
+			paddingBottom: 2,
+			paddingLeft: "10%",
+
+		},
+		taskContainer: {
+			paddingTop: 20,
+			paddingBottom: 20,
+			flexGrow: 2, 
+			flexShrink: 2,
+			flexBasis: "0px",
+			maxWidth: "calc(100% / 7)",
+			height: "100%",
+			curDay: {
+				backgroundColor: "#240046",
+			},
+			overflow: "hidden",
+		},
+		headerLabels: {
+			flexGrow: 2, 
+			flexShrink: 2,
+			flexBasis: "0px",
+			fontSize: 18,
+			textAlign: "center",
+			color: "#9D4EDD",
+			maxWidth: "calc(100% / 7)",
+			curDay: {
+				color: "#C77DFF",
+				fontWeight: "bold"
+			}
+		},
+		marginBottom: 30
 
 
+	    },
+	    calTask: {
+		taskHeader: {
+			backgroundColor: "red",
+			fontSize: 10,
+			borderRadius: 5,
+			paddingLeft: 2,
+			fontFamily: "comfortaa",
+			color: "#10002B",
+		},
+		completed: {
+			backgroundColor: "green"
+		},
+		titleText: {
+			fontFamily: "comfortaa",
+			fontStyle: "bold",
+			fontSize: 16,
+			color: "black",
+		},
+		margin: "0 0 0 0",
+		backgroundColor: '#C77DFF',
+		borderRadius: 10,
+		paddingHorizontal: 2,
+		paddingVertical: 2,
+		overflow: "hidden",
+		textOverflow: "ellipsis",
+		whiteSpace: "nowrap",
+	    }
     },
-    calTask: {
-    	taskHeader: {
-		backgroundColor: "red",
-		fontSize: 8,
-        	borderRadius: 5,
-		paddingLeft: 2,
-            	fontFamily: "comfortaa",
-		color: "#10002B",
-	},
-    	completed: {
-		backgroundColor: "green"
-	},
-	titleText: {
-            	fontFamily: "comfortaa",
-		fontStyle: "bold",
-		fontSize: 12,
-		color: "black",
-	},
-	margin: 0,
-        backgroundColor: '#C77DFF',
-        borderRadius: 10,
-        paddingHorizontal: 1,
-        paddingVertical: 1,
-    }
+
+    mobileCalenderStyles: {
+	    isMobile: true,
+	    calender: {
+		timeStamp: {
+			color: '#7B2CBF',
+			fontSize: 8,
+			minWidth: "10%",
+			maxWidth: "10%",
+			flexShrink: 1,
+		},
+		currentTime: {color: "#C77DFF", fontWeight: "bold", fontSize: 10},
+		tsContainer: {
+			display: "flex",
+			flexDirection: "row",
+			alignItems: "center",
+			textAlign: "left",
+		},
+		daySeperator: {
+			borderBottomWidth: 3,
+			borderColor: "#9D4EDD",
+			borderRadius: 1
+		},
+		header: {
+			flexDirection: "row",
+			paddingTop: 2,
+			paddingBottom: 2,
+			paddingLeft: "10%",
+		},
+		taskContainer: {
+			paddingTop: 10,
+			paddingBottom: 10,
+			flexGrow: 2, 
+			flexShrink: 2,
+			flexBasis: "0px",
+			width: "calc(100% / 7)",
+			minWidth: "calc(100% / 7)",
+			alignItems: "center",
+			height: "100%",
+			curDay: {
+				backgroundColor: "#240046",
+			},
+			overflow: "hidden",
+			textOverflow: "ellipsis",
+			whiteSpace: "nowrap",
+		},
+		headerLabels: {
+			flexGrow: 2, 
+			flexShrink: 2,
+			flexBasis: 0,
+			fontSize: 8,
+			textAlign: "center",
+			color: "#9D4EDD",
+			maxWidth: "14.3%",
+			minWidth: "14.3%",
+			curDay: {
+				color: "#C77DFF",
+				fontWeight: "bold"
+			}
+		},
+
+
+	    },
+	    calTask: {
+		taskHeader: {
+			backgroundColor: "red",
+			fontSize: 1,
+			fontFamily: "comfortaa",
+			color: "#10002B",
+		},
+		completed: {
+			backgroundColor: "green"
+		},
+		titleText: {
+			fontFamily: "comfortaa",
+			fontStyle: "bold",
+			fontSize: 1,
+			color: "black",
+		},
+		margin: "0 0 0 0",
+		borderRadius: 8,
+		width: "95%",
+		backgroundColor: '#C77DFF',
+		overflow: "hidden",
+		textOverflow: "ellipsis",
+		whiteSpace: "nowrap",
+	    }
+    },
 });

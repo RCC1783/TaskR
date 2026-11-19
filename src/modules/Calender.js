@@ -1,37 +1,39 @@
-import { Text, View, Pressable, ScrollView} from "react-native";
+import { Text, View, Pressable, ScrollView, Dimensions} from "react-native";
 import { styles } from "../styles";
 import { /*TaskType, TaskStatus,*/ insertTasksForDayAndHour } from "../modules/Task";
-function TimeStamp({time, children, nextDay, current}) {
+function TimeStamp({time, children, nextDay, current, dynamicStyle}) {
 	return (
-		<View style={[styles.hr, styles.calender.tsContainer, nextDay]}>
-			<Text style={[styles.calender.timeStamp, current]}>{time}</Text>
+		<View style={[styles.hr, dynamicStyle.calender.tsContainer, nextDay]}>
+			<Text style={[dynamicStyle.calender.timeStamp, current]}>{time}</Text>
 			{children}	
 		</View>
 	);
 }
-function TaskContainer({curDay, day, stamp}) {
-	const curDayStyle = (curDay === day) ? styles.calender.taskContainer.curDay : 0;
-	const tasks = insertTasksForDayAndHour(day-curDay, stamp);
-	const shrinkPadding = (tasks.length != 0) ? {padding: 0} : 0;
+function TaskContainer({curDay, day, stamp, dynamicStyle}) {
+	const curDayStyle = (curDay === day) ? dynamicStyle.calender.taskContainer.curDay : 0;
+	const tasks = insertTasksForDayAndHour(day-curDay, stamp, dynamicStyle);
+	const shrinkPadding = (tasks.length != 0) ? {paddingTop: 0, paddingBottom: 0} : 0;
 	return (
-		<View style={[styles.calender.taskContainer, curDayStyle, shrinkPadding]}>
-			{insertTasksForDayAndHour(day - curDay, stamp)}
+		<View style={[dynamicStyle.calender.taskContainer, curDayStyle, shrinkPadding]}>
+			{tasks}
 		</View>
 	);
 
 }
-function CalenderHeader({curDay, days}) {
+function CalenderHeader({curDay, days, dynamicStyle}) {
 	return (
-		<View style={styles.calender.header}>
+		<View style={dynamicStyle.calender.header}>
 			{days.map((day, index) => {
-				const styleCurDay = (curDay===day) ? styles.calender.headerLabels.curDay : 0;
-				return (<Text key={index} style={[styles.calender.headerLabels, styleCurDay]}>{day}</Text>);
+				const styleCurDay = (curDay===day) ? dynamicStyle.calender.headerLabels.curDay : 0;
+				return (<Text key={index} style={[dynamicStyle.calender.headerLabels, styleCurDay]}>{day}</Text>);
 			})}
 		</View>
 	);
 }
 
 export function Calender() {
+	const surveyWidth = Dimensions.get("window").width <= 767;
+	const dynamicStyle = surveyWidth ? styles.mobileCalenderStyles : styles.calenderStyles;
 	const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 	const curDay = new Date(Date.now()).getDay();
 	const curHour = new Date(Date.now()).getHours();
@@ -57,18 +59,19 @@ export function Calender() {
 			t = 12;
 		}
 		timestamps.push((<TimeStamp 
+			dynamicStyle={dynamicStyle}
 			key={i}
-			nextDay={(ot==23) ? styles.calender.daySeperator : {}} 
-			current={(ot==curHour) ? {color: "#C77DFF", fontWeight: "bold", fontSize: 14.4} : {}}
+			nextDay={(ot==23) ? dynamicStyle.calender.daySeperator : {}} 
+			current={(ot==curHour) ? dynamicStyle.calender.currentTime : {}}
 			time={t+":00 "+suffix}
-			children={days.map((day, index) =>{return (<TaskContainer key={index} stamp={timeStampUnixTimeDate} day={index} curDay={curDay}/>)})}
+			children={days.map((day, index) =>{return (<TaskContainer dynamicStyle={dynamicStyle} key={index} stamp={timeStampUnixTimeDate} day={index} curDay={curDay}/>)})}
 			/>));
 		timeStampUnixTimeDate += unixTimeHourDelta;
 	}
 
 	return (
-		<ScrollView style={styles.calender}>
-			<CalenderHeader curDay={days[curDay]} days={days}/>
+		<ScrollView style={dynamicStyle.calender}>
+			<CalenderHeader dynamicStyle={dynamicStyle} curDay={days[curDay]} days={days}/>
 			{timestamps}
 		</ScrollView>
 	);
