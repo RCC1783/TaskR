@@ -2,6 +2,7 @@ import { Text, View, Pressable, FlatList, } from "react-native";
 import { useFocusEffect, useNavigation } from "@react-navigation/native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { InteractivePressable } from "../modules/InteractivePressable"
+import { Calender } from "../modules/Calender"
 
 import { styles } from "../styles";
 import { NavMenu } from "../modules/navMenu";
@@ -81,6 +82,7 @@ export default function HomeScreen({navigation}){
             />
             
             <NavMenu navigation={navigation}/>
+	    <Calender/>
         </SafeAreaView>
     );
 }

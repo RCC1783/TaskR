@@ -182,5 +182,83 @@ export const styles = StyleSheet.create({
         position: 'absolute',
         right: 20,
         top: 15
+    },
+
+    calender: {
+	timeStamp: {
+		color: '#7B2CBF',
+		fontSize: "0.8em",
+		minWidth: "5%",
+		flexShrink: 1,
+	},
+        tsContainer: {
+		display: "flex",
+		flexDirection: "row",
+		alignItems: "center",
+		textAlign: "left",
+        },
+	daySeperator: {
+		borderBottomWidth: 3,
+		borderColor: "#9D4EDD",
+		borderRadius: 1
+	},
+	header: {
+		marginLeft: "5%",
+		display: "flex",
+		flexDirection: "row",
+		paddingTop: "0.6em",
+		paddingBottom: "0.6em",
+
+	},
+	taskContainer: {
+		paddingTop: "1em",
+		paddingBottom: "1em",
+		flexGrow: 2, 
+		flexShrink: 2,
+		flexBasis: "0px",
+		maxWidth: "calc(100% / 7)",
+		height: "100%",
+		curDay: {
+			backgroundColor: "#240046",
+		},
+	},
+	headerLabels: {
+		flexGrow: 2, 
+		flexShrink: 2,
+		flexBasis: "0px",
+		fontSize: "1em",
+		textAlign: "center",
+		color: "#9D4EDD",
+		maxWidth: "calc(100% / 7)",
+		curDay: {
+			color: "#C77DFF",
+			fontWeight: "bold"
+		}
+	}
+
+    },
+    calTask: {
+    	taskHeader: {
+		backgroundColor: "red",
+		fontSize: "0.7em",
+        	borderRadius: "0.8em",
+		paddingLeft: "0.5em",
+            	fontFamily: "comfortaa",
+		color: "#10002B",
+	},
+    	completed: {
+		backgroundColor: "green"
+	},
+	titleText: {
+            	fontFamily: "comfortaa",
+		fontStyle: "bold",
+		fontSize: "1em",
+		color: "black",
+	},
+	margin: 0,
+        backgroundColor: '#C77DFF',
+        borderRadius: "1em",
+        paddingHorizontal: "0.5em",
+        paddingVertical: "0.25em",
     }
 });
