@@ -35,9 +35,9 @@ export function insertTasksForDayAndHour(dayDelta, stamp) {
 	const taskBlockTimeStamp = stamp + dayDelta * unixTimeDayDelta;
 	// tasks array will probably be sorted, algorithm will change
 	for (let i=0; i<tasks.length; i++) {
-		const timeDiffStart = (tasks[i].start + unixTimeHourDelta - taskBlockTimeStamp)
+		const timeDiffStart = Math.abs(tasks[i].start - taskBlockTimeStamp)
 		const timeDiffEnd = (tasks[i].end + unixTimeHourDelta - taskBlockTimeStamp)
-		if ((timeDiffStart < unixTimeHourDelta && timeDiffStart > 0) || (timeDiffEnd < unixTimeHourDelta && timeDiffEnd > 0)) {
+		if ((tasks[i].start >= taskBlockTimeStamp && tasks[i].start < taskBlockTimeStamp + unixTimeHourDelta)) {
 			tasksNow.push(
 				<Task key={i} task={tasks[i]}/>	
 			);
