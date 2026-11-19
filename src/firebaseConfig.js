@@ -2,13 +2,13 @@
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
 import { getAuth, initializeAuth, getReactNativePersistence } from 'firebase/auth';
-import AsyncStorage from "@react-native-async-storage/async-storage";
+import ReactNativeAsyncStorage from "@react-native-async-storage/async-storage";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyDtE8_XpuqVR3okI6frd3xB_lntwtufBNk",
+  apiKey: process.env.EXPO_PUBLIC_FIREBASE_API_KEY,
   authDomain: "taskr-c9177.firebaseapp.com",
   projectId: "taskr-c9177",
   storageBucket: "taskr-c9177.firebasestorage.app",
@@ -20,6 +20,7 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 
 export const firestoreDB = getFirestore(app);
-export const firebaseAuth = initializeApp(app, {
-  persistence: getReactNativePersistence(AsyncStorage)
-});
+
+// export const appStorage = createAsyncStorage("app");
+const persistence = getReactNativePersistence(ReactNativeAsyncStorage);
+export const firebaseAuth = initializeAuth(app, {persistence});
