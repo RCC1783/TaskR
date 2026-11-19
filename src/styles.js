@@ -2,10 +2,10 @@ import { StyleSheet } from "react-native";
 
 export const styles = StyleSheet.create({
     viewportContainer: {
-	homeScreen: {
-	backgroundImage: "linear-gradient(159deg,rgba(16, 0, 43, 1) 0%, #330A5C 50%, #10002B 100%)"
-	},
-	backgroundColor: "#10002B",
+        homeScreen: {
+            backgroundImage: "linear-gradient(191deg, #4C097E 25.01%, #3D1D91 75.01%)"
+        },
+	    backgroundImage: "linear-gradient(180deg, #4C097E 43.76%, #3D1D91 100%)",
         flex: 1,
         flexDirection: 'column',
         paddingHorizontal: 25,
@@ -25,25 +25,25 @@ export const styles = StyleSheet.create({
         fontSize: 48,
         fontFamily: 'calSans',
         maxWidth: 600,
-	color: '#ffffff',
-	filter: "drop-shadow(0px 0px 12px #5A189A);",
-	marginBottom: 25
+        color: '#ffffff',
+        filter: "drop-shadow(0px 0px 12px #5A189A);",
+        marginBottom: 25
     },
     h1: {
         fontSize: 24,
         fontFamily: "comfortaa",
         fontWeight: 'bold',
-	color: "#9D4EDD"
+	    color: "#ffffff"
     },
     h2: {
         fontSize: 20,
         fontFamily: "comfortaa",
         fontWeight: 'semibold',
-	color: "#9D4EDD"
+	    color: "#ffffff"
     },
 
     hr: {
-        borderColor: '#7B2CBF',
+        borderColor: '#ffffff',
         borderBottomWidth: 1,
         borderRadius: 5
     },
@@ -51,8 +51,8 @@ export const styles = StyleSheet.create({
         placeholder: {
             colour: '#E0AAFF'
         },
-	backgroundColor: "#240046",
-	color: '#C77DFF',
+        backgroundColor: "#240046",
+        color: '#C77DFF',
 
         fontSize: 16,
         fontFamily: "comfortaa",
@@ -75,16 +75,16 @@ export const styles = StyleSheet.create({
             textAlign: 'center',
             color: '#ffff',
         },
-	hover: {
+	    hover: {
             backgroundColor: '#9D4EDD'
-	},
-	pressed: {
-	    backgroundColor: '#5A189A',
-	    transition: 'background-color 0s'
-	},
+	    },
+        pressed: {
+            backgroundColor: '#5A189A',
+            transition: 'background-color 0s'
+        },
 
         backgroundColor: '#7B2CBF',
-	transition: 'background-color 0.25s',
+	    transition: 'background-color 0.25s',
 
         shadowOpacity: 0.15,
         shadowRadius: 5,
@@ -108,42 +108,46 @@ export const styles = StyleSheet.create({
 
     taskBlock: {
         date: {
-            fontSize: 13,
+            fontSize: 12,
+            fontWeight: 'light',
             fontFamily: "comfortaa",
+            color: '#FFFF'
         },
         title: {
             fontSize: 20,
             fontFamily: "comfortaa",
             fontWeight: 'bold',
-            
+            color: '#FFFF'
         },
         description: {
             fontSize: 14,
             fontFamily: "comfortaa",
+            color: '#FFFF'
         },
         editButton: {
-            fontSize: 14,
+            fontSize: 12,
             fontFamily: "comfortaa",
             fontWeight: "bold",
-            color: "#7B2CBF",
+            color: "#FFBAB8",
 
             width: '100%',
             textAlign: 'right'
         },
 
 
-        backgroundColor: '#C77DFF',
-        shadowOpacity: 0.15,
-        shadowRadius: 5,
-        shadowColor: "#000",
-        shadowOffset: {width: 0, height: 1},
+        backgroundColor: 'rgba(3, 0, 10, 0.3)',
+        boxShadow: '1px 2px 2px 0 rgba(185, 255, 251, 0.15) inset, 0 2px 5px 0 rgba(0, 0, 0, 0.50)',
         elevation: 5,
 
+        border: '1.5px solid rgba(162, 95, 255, 0.3)',
         borderRadius: 25,
 
-        paddingHorizontal: 20,
-        paddingVertical: 10,
+        paddingHorizontal: 15,
+        paddingVertical: 12,
+        gap: 5, 
         maxWidth: 500,
+        marginHorizontal: 5,
+        marginBottom: 10,
     },
 
     navMenu: {
@@ -151,23 +155,23 @@ export const styles = StyleSheet.create({
             fontSize: 14,
             fontFamily: "comfortaa",
             fontWeight: 'bold',
-	    color: "#9D4EDD"
+	        color: "#fff",
         },
-        // flex: 1,
+        flex: 1,
         flexDirection: 'row',
         justifyContent: 'space-evenly',
         alignItems: 'center',
-	backgroundColor: "#240046",
-	borderRadius: '1em',
-	borderStyle: 'solid',
-	borderWidth: '1px',
-	borderColor: '#5A189A',
         
-        paddingHorizontal: 20,
+        backgroundColor: "rgba(41, 26, 65, 0.95)",
+        borderRadius: '1em',
+        border: '1px solid rgba(244, 128, 255, 0.27)',
+        
+        paddingHorizontal: 45,
         paddingVertical: 10,
         borderRadius: 25,
 
-        boxShadow: '0 0 4px 2px #5a189a inset',
+        boxShadow: '1px 2px 1.5px 0 rgba(231, 179, 255, 0.25) inset, 0 1px 5px 0 rgba(0, 0, 0, 0.15)',
+        effects: 110
     },
 
     devUserIcon: {
