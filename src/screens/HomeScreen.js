@@ -66,9 +66,9 @@ export default function HomeScreen({navigation}){
             
             <View style={styles.hr}/>
 
-            <NavMenu navigation={navigation}/>
+	        <Calender/>
 
-	        {/* <Calender/> */}
+            <NavMenu navigation={navigation}/>
         </SafeAreaView>
     );
 }

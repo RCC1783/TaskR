@@ -165,7 +165,7 @@ export const styles = StyleSheet.create({
         alignItems: 'center',
         
         backgroundColor: "rgba(41, 26, 65, 0.95)",
-        borderRadius: '1em',
+        borderRadius: 16,
         border: '1px solid rgba(244, 128, 255, 0.27)',
         
         paddingHorizontal: 45,
@@ -189,7 +189,7 @@ export const styles = StyleSheet.create({
     calender: {
 	timeStamp: {
 		color: '#7B2CBF',
-		fontSize: "0.8em",
+		fontSize: 12.8,
 		minWidth: "5%",
 		flexShrink: 1,
 	},
@@ -208,13 +208,13 @@ export const styles = StyleSheet.create({
 		marginLeft: "5%",
 		display: "flex",
 		flexDirection: "row",
-		paddingTop: "0.6em",
-		paddingBottom: "0.6em",
+		paddingTop: 9.6,
+		paddingBottom: 9.6,
 
 	},
 	taskContainer: {
-		paddingTop: "1em",
-		paddingBottom: "1em",
+		paddingTop: 16,
+		paddingBottom: 16,
 		flexGrow: 2, 
 		flexShrink: 2,
 		flexBasis: "0px",
@@ -228,7 +228,7 @@ export const styles = StyleSheet.create({
 		flexGrow: 2, 
 		flexShrink: 2,
 		flexBasis: "0px",
-		fontSize: "1em",
+		fontSize: 16,
 		textAlign: "center",
 		color: "#9D4EDD",
 		maxWidth: "calc(100% / 7)",
@@ -242,9 +242,9 @@ export const styles = StyleSheet.create({
     calTask: {
     	taskHeader: {
 		backgroundColor: "red",
-		fontSize: "0.7em",
-        	borderRadius: "0.8em",
-		paddingLeft: "0.5em",
+		fontSize: 12,
+        borderRadius: 12.8,
+		paddingLeft: 8,
             	fontFamily: "comfortaa",
 		color: "#10002B",
 	},
@@ -254,13 +254,13 @@ export const styles = StyleSheet.create({
 	titleText: {
             	fontFamily: "comfortaa",
 		fontStyle: "bold",
-		fontSize: "1em",
+		fontSize: 16,
 		color: "black",
 	},
 	margin: 0,
         backgroundColor: '#C77DFF',
-        borderRadius: "1em",
-        paddingHorizontal: "0.5em",
-        paddingVertical: "0.25em",
+        borderRadius: 16,
+        paddingHorizontal: 8,
+        paddingVertical: 4,
     }
 });
