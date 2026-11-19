@@ -59,7 +59,7 @@ export function Calender() {
 		timestamps.push((<TimeStamp 
 			key={i}
 			nextDay={(ot==23) ? styles.calender.daySeperator : {}} 
-			current={(ot==curHour) ? {color: "#C77DFF", fontWeight: "bold", fontSize: "0.9em"} : {}}
+			current={(ot==curHour) ? {color: "#C77DFF", fontWeight: "bold", fontSize: 14} : {}}
 			time={t+":00 "+suffix}
 			children={days.map((day, index) =>{return (<TaskContainer key={index} stamp={timeStampUnixTimeDate} day={index} curDay={curDay}/>)})}
 			/>));
