@@ -1,6 +1,7 @@
 // Screens
 import HomeScreen from './src/screens/HomeScreen';
 import LoginScreen from './src/screens/LoginScreen';
+import CreateNewTask from './src/screens/CreateNewTask';
 
 // Modules
 import { SafeAreaProvider } from 'react-native-safe-area-context';
@@ -9,6 +10,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { useFonts } from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
 import { useEffect } from 'react';
+
 
 /* Copy & paste in your terminal to install these to your project folder:
 - npx expo install react-native-screens react-native-safe-area-context
@@ -45,6 +47,7 @@ export default function App() {
           <Stack.Navigator initialRouteName="login" screenOptions={{headerShown: false, gestureEnabled: true}}>
             <Stack.Screen name="home" component={HomeScreen} />
             <Stack.Screen name="login" component={LoginScreen} />
+            <Stack.Screen name="newTask" component={CreateNewTask} options={{presentation: "modal"}}/>
           </Stack.Navigator>
         </NavigationContainer>
       </SafeAreaProvider>
