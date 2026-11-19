@@ -10,7 +10,7 @@ import { useCallback, useEffect, useState } from "react";
 import { collection, getDocs, Timestamp } from "firebase/firestore";
 import { firestoreDB } from "../firebaseConfig";
 
-async function GetTasks(){
+export async function GetTasks(){
     const querySnapshot = await getDocs(collection(firestoreDB, "test"));
 
     let allDocs = [];
@@ -65,24 +65,10 @@ export default function HomeScreen({navigation}){
             )}
             
             <View style={styles.hr}/>
-            <Text style={styles.h2}>All</Text>
-            <FlatList
-                data={taskList}
-                keyExtractor={item => item.id}
-                renderItem={({item}) => (
-                    <View style={styles.taskBlock}>
-                        <Text style={styles.taskBlock.date}>Do by: {item.dueDate.toDate().toLocaleString()}</Text>
-                        <Text style={styles.taskBlock.title}>{item.title}</Text>
-                        <Text style={styles.taskBlock.description}>{item.description}</Text>
-                        <Pressable>
-                            <Text style={styles.taskBlock.editButton}>Edit</Text>
-                        </Pressable>
-                    </View>
-                )}
-            />
-            
+
             <NavMenu navigation={navigation}/>
-	    <Calender/>
+
+	        {/* <Calender/> */}
         </SafeAreaView>
     );
 }

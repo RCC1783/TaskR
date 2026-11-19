@@ -16,13 +16,10 @@ export const NavMenu = ({navigation}) => {
     return(
         <View style={{flexDirection: 'row', padding: 10, alignItems: 'center', justifyContent: 'center', gap: 15, width: '100%', position: 'fixed', left: insets.left, bottom: insets.bottom}}>
             <View style={styles.navMenu}>
-                <Pressable>
+                <Pressable onPress={() => navigation.navigate('home')}>
                     <Text style={styles.navMenu.text}>Home</Text>
                 </Pressable>
-                <Pressable>
-                    <Text style={styles.navMenu.text}>Calendar</Text>
-                </Pressable>
-                <Pressable>
+                <Pressable onPress={() => navigation.navigate('agenda')}>
                     <Text style={styles.navMenu.text}>Agenda</Text>
                 </Pressable>
             </View>

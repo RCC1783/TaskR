@@ -7,6 +7,7 @@ export const styles = StyleSheet.create({
         },
 	    backgroundImage: "linear-gradient(180deg, #4C097E 43.76%, #3D1D91 100%)",
         flex: 1,
+        minHeight: '100%',
         flexDirection: 'column',
         paddingHorizontal: 25,
         paddingVertical: 20,

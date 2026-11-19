@@ -11,6 +11,7 @@ import { useFonts } from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
 import { useEffect } from 'react';
 import { Reminders } from './src/modules/Reminders';
+import AgendaScreen from './src/screens/AgendaScreen';
 
 
 /* Copy & paste in your terminal to install these to your project folder:
@@ -49,6 +50,7 @@ export default function App() {
         <NavigationContainer>
           <Stack.Navigator initialRouteName="login" screenOptions={{headerShown: false, gestureEnabled: true}}>
             <Stack.Screen name="home" component={HomeScreen} />
+            <Stack.Screen name="agenda" component={AgendaScreen} />
             <Stack.Screen name="login" component={LoginScreen} />
             <Stack.Screen name="newTask" component={CreateNewTask} options={{presentation: "modal"}}/>
           </Stack.Navigator>
