@@ -137,7 +137,7 @@ export const styles = StyleSheet.create({
         },
 
 
-        backgroundColor: 'rgba(3, 0, 10, 0.3)',
+        backgroundColor: 'rgba(54, 6, 91, 1)',
         boxShadow: '1px 2px 2px 0 rgba(185, 255, 251, 0.15) inset, 0 2px 5px 0 rgba(0, 0, 0, 0.50)',
         elevation: 5,
 
