@@ -1,6 +1,6 @@
 import { Text, View, Pressable, ScrollView} from "react-native";
 import { styles } from "../styles";
-import { TaskType, TaskStatus, insertTasksForDayAndHour } from "../modules/Task";
+import { /*TaskType, TaskStatus,*/ insertTasksForDayAndHour } from "../modules/Task";
 function TimeStamp({time, children, nextDay, current}) {
 	return (
 		<View style={[styles.hr, styles.calender.tsContainer, nextDay]}>

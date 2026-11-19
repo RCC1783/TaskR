@@ -1,13 +1,13 @@
 import { Text, View, Pressable, FlatList, } from "react-native";
 import { useFocusEffect, useNavigation } from "@react-navigation/native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { InteractivePressable } from "../modules/InteractivePressable"
+// import { InteractivePressable } from "../modules/InteractivePressable"
 
 import { styles } from "../styles";
 import { NavMenu } from "../modules/navMenu";
 import { useCallback, useEffect, useState } from "react";
-import { collection, getDocs, Timestamp } from "firebase/firestore";
-import { firestoreDB } from "../firebaseConfig";
+// import { collection, getDocs, Timestamp } from "firebase/firestore";
+// import { firestoreDB } from "../firebaseConfig";
 import { GetTasks } from "./HomeScreen";
 
 // Screen to display all tasks chronologically from oldest to newest
