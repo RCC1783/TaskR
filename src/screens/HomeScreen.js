@@ -10,6 +10,7 @@ import { useCallback, useEffect, useState } from "react";
 import { collection, getDocs, Timestamp } from "firebase/firestore";
 import { firestoreDB } from "../firebaseConfig";
 
+// Function to get tasks from firebase
 export async function GetTasks(){
     const querySnapshot = await getDocs(collection(firestoreDB, "test"));
 
@@ -24,7 +25,7 @@ export async function GetTasks(){
     return allDocs;
 }
 
-// Repurposing the Home screen to be the Agenda Screen unless we decide we want a specific home screen
+// The main screen of the application. Displays most upcoming task and calendar view
 export default function HomeScreen({navigation}){
     // const navigation = useNavigation();
     let date = new Date();

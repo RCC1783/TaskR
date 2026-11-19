@@ -28,6 +28,7 @@ const Stack = createNativeStackNavigator();
 
 SplashScreen.preventAutoHideAsync();
 
+// Main function & screen manager
 export default function App() {
   const [loaded, error] = useFonts({
     'comfortaa': require('./assets/fonts/Comfortaa/Comfortaa-VariableFont_wght.ttf'),

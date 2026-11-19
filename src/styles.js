@@ -1,5 +1,6 @@
 import { StyleSheet } from "react-native";
 
+// Main stylesheet used for components.
 export const styles = StyleSheet.create({
     viewportContainer: {
         homeScreen: {

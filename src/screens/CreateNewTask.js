@@ -5,6 +5,7 @@ import { useState, useEffect } from "react";
 import { collection, doc, getDocs, setDoc, Timestamp } from "firebase/firestore";
 import { firestoreDB } from "../firebaseConfig";
 
+// A testing class used mainly for creating tasks on the application end
 class Task {
     dueDate = null;
     title = ''
@@ -16,6 +17,7 @@ class Task {
     }
 }
 
+// Uploads inputed task to firestore database
 async function UploadTask(newTask) {
     try{
         const docRef = doc(collection(firestoreDB, 'test'));
@@ -27,6 +29,7 @@ async function UploadTask(newTask) {
     }
 }
 
+// Screen where user is able to input task details and create the task
 export default function CreateNewTask({navigation}){
     const [taskName, setTaskName] = useState("");
     const [taskDescription, setTaskDescription] = useState("");

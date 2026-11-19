@@ -6,8 +6,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { styles } from "../styles";
 import { useEffect, useState } from "react";
 
-
-
+// Reusable Navigation bar to switch between screens. Add to bottom of other screens to use
 export const NavMenu = ({navigation}) => {
     const insets = useSafeAreaInsets();
 

@@ -10,6 +10,7 @@ import { collection, getDocs, Timestamp } from "firebase/firestore";
 import { firestoreDB } from "../firebaseConfig";
 import { GetTasks } from "./HomeScreen";
 
+// Screen to display all tasks chronologically from oldest to newest
 export default function AgendaScreen({navigation}) {
     let date = new Date();
     

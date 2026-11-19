@@ -7,6 +7,7 @@ import { styles } from "../styles";
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
 import { firebaseAuth } from "../firebaseConfig";
 
+// Function to request sign in from firebase authentication module
 async function SignIn(email, password, navigation) {
     try{
         if(email == '' || password == '') return "sign in fail";
@@ -20,6 +21,7 @@ async function SignIn(email, password, navigation) {
     }
 }
 
+// Function to request sign up from firebase authentication module
 async function SignUp(email, password, navigation) {
     try {
         if(email == '' || password == '') return "sign up fail";
@@ -33,6 +35,7 @@ async function SignUp(email, password, navigation) {
     }
 }
 
+// Screen for users to log in
 export default function LoginScreen({navigation}){ 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
