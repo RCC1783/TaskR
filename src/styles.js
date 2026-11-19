@@ -164,6 +164,14 @@ export const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-evenly',
         alignItems: 'center',
+<<<<<<< HEAD
+	backgroundColor: "#3C096C",
+	borderRadius: '1em',
+	borderStyle: 'solid',
+	borderWidth: 1,
+	borderColor: '#5A189A',
+=======
+>>>>>>> master
         
         backgroundColor: "rgba(41, 26, 65, 0.95)",
         borderRadius: 16,
@@ -190,8 +198,14 @@ export const styles = StyleSheet.create({
     calender: {
 	timeStamp: {
 		color: '#7B2CBF',
+<<<<<<< HEAD
+		fontSize: 12,
+		minWidth: "10%",
+		maxWidth: "10%",
+=======
 		fontSize: 12.8,
 		minWidth: "5%",
+>>>>>>> master
 		flexShrink: 1,
 	},
         tsContainer: {
@@ -206,16 +220,14 @@ export const styles = StyleSheet.create({
 		borderRadius: 1
 	},
 	header: {
-		marginLeft: "5%",
-		display: "flex",
 		flexDirection: "row",
-		paddingTop: 9.6,
-		paddingBottom: 9.6,
+		paddingTop: 2,
+		paddingBottom: 2,
 
 	},
 	taskContainer: {
-		paddingTop: 16,
-		paddingBottom: 16,
+		paddingTop: 4,
+		paddingBottom: 4,
 		flexGrow: 2, 
 		flexShrink: 2,
 		flexBasis: "0px",
@@ -229,7 +241,7 @@ export const styles = StyleSheet.create({
 		flexGrow: 2, 
 		flexShrink: 2,
 		flexBasis: "0px",
-		fontSize: 16,
+		fontSize: 12,
 		textAlign: "center",
 		color: "#9D4EDD",
 		maxWidth: "calc(100% / 7)",
@@ -237,15 +249,16 @@ export const styles = StyleSheet.create({
 			color: "#C77DFF",
 			fontWeight: "bold"
 		}
-	}
+	},
+
 
     },
     calTask: {
     	taskHeader: {
 		backgroundColor: "red",
-		fontSize: 12,
-        borderRadius: 12.8,
-		paddingLeft: 8,
+		fontSize: 8,
+        	borderRadius: 5,
+		paddingLeft: 2,
             	fontFamily: "comfortaa",
 		color: "#10002B",
 	},
@@ -255,13 +268,13 @@ export const styles = StyleSheet.create({
 	titleText: {
             	fontFamily: "comfortaa",
 		fontStyle: "bold",
-		fontSize: 16,
+		fontSize: 12,
 		color: "black",
 	},
 	margin: 0,
         backgroundColor: '#C77DFF',
-        borderRadius: 16,
-        paddingHorizontal: 8,
-        paddingVertical: 4,
+        borderRadius: 10,
+        paddingHorizontal: 1,
+        paddingVertical: 1,
     }
 });
