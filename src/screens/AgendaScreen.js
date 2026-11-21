@@ -24,7 +24,7 @@ export default function AgendaScreen({navigation}) {
     
         useEffect(() => {
             taskList.sort((a, b) => {
-                return a.dueDate.toDate() - b.dueDate.toDate();
+                return a.start - b.start;
             })
         }, [taskList])
 
@@ -41,8 +41,8 @@ export default function AgendaScreen({navigation}) {
                 keyExtractor={item => item.id}
                 renderItem={({item}) => (
                     <View style={styles.taskBlock}>
-                        <Text style={styles.taskBlock.date}>Do by: {item.dueDate.toDate().toLocaleString()}</Text>
-                        <Text style={styles.taskBlock.title}>{item.title}</Text>
+                        <Text style={styles.taskBlock.date}>Do by: {new Date(item.start).toLocaleTimeString("en-US")}</Text>
+                        <Text style={styles.taskBlock.title}>{item.name}</Text>
                         <Text style={styles.taskBlock.description}>{item.description}</Text>
                         <Pressable>
                             <Text style={styles.taskBlock.editButton}>Edit</Text>

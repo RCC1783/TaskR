@@ -1,5 +1,6 @@
 import { Text, View, Pressable, } from "react-native";
 import { styles } from "../styles";
+import { Timestamp } from "firebase/firestore"
 // some example tasks
 export const TaskType = {
 	EVENT: 0,
@@ -11,6 +12,22 @@ export const TaskStatus = {
 	IN_PROGRESS: 1,
 	COMPLETE: 2
 };
+export class Task {
+	name;
+	description;
+	type;
+	start;
+	end;
+	taskStatus;
+	constructor(name='',description='No description provided', type=TaskType.REMINDER, start=Date.now(), end=-1, taskStatus=TaskStatus.INCOMPLETE) {
+		this.name=name;
+		this.description=description;
+		this.type = type;
+		this.start = start;
+		this.end = end;
+		this.taskStatus = taskStatus;
+	}
+}
 const tasks = [
 		{name: "Homework", description: "Math Homework", type: TaskType.DUE_DATE, start: new Date(2026, 10, 20, 23).getTime(), end: -1, taskStatus: TaskStatus.INCOMPLETE },
 		{name: "Group Meeting", description: "Business Planning Group Meeting for Project 2", type: TaskType.EVENT, start: new Date(2026, 10, 19, 11, 30).getTime(), end: new Date(2026, 10, 19, 13, 30).getTime(), taskStatus: TaskStatus.INCOMPLETE },
@@ -18,7 +35,7 @@ const tasks = [
 		{name: "Study Session", description: "study for next week", type: TaskType.REMINDER, start: new Date(2026, 10, 21, 16, 30).getTime(), end: -1, taskStatus: TaskStatus.INCOMPLETE },
 		{name: "Work on Project", description: "Do Stuff for Comp Sci Project", type: TaskType.REMINDER, start: new Date(2026, 10, 15, 16, 30).getTime(), end: -1, taskStatus: TaskStatus.COMPLETE }
 		];
-export function Task({task, dynamicStyle}) {
+export function CalenderTask({task, dynamicStyle}) {
 	const timeText = (task.type === TaskType.EVENT) ? new Date(task.start).toLocaleTimeString("en-US") + " - " + new Date(task.end).toLocaleTimeString("en-US")
 		: new Date(task.start).toLocaleTimeString("en-US");
 	const isCompleted = (task.taskStatus === TaskStatus.COMPLETE) ? dynamicStyle.calTask.completed : 0;
@@ -40,7 +57,7 @@ export function insertTasksForDayAndHour(dayDelta, stamp, dynamicStyle) {
 		const timeDiffEnd = (tasks[i].end + unixTimeHourDelta - taskBlockTimeStamp)
 		if ((tasks[i].start >= taskBlockTimeStamp && tasks[i].start < taskBlockTimeStamp + unixTimeHourDelta)) {
 			tasksNow.push(
-				<Task dynamicStyle={dynamicStyle} key={i} task={tasks[i]}/>	
+				<CalenderTask dynamicStyle={dynamicStyle} key={i} task={tasks[i]}/>	
 			);
 		}
 	}
