@@ -4,18 +4,7 @@ import { styles } from "../styles";
 import { useState, useEffect } from "react";
 import { collection, doc, getDocs, setDoc, Timestamp } from "firebase/firestore";
 import { firestoreDB } from "../firebaseConfig";
-
-// A testing class used mainly for creating tasks on the application end
-class Task {
-    dueDate = null;
-    title = ''
-    description = "no description provided";
-    constructor(tite, description){
-        this.title = tite;
-        this.description = description;
-        this.dueDate = Timestamp.now();
-    }
-}
+import { Task } from "../modules/Task"
 
 // Uploads inputed task to firestore database
 async function UploadTask(newTask) {
