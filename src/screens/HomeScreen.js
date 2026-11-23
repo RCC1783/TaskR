@@ -62,7 +62,7 @@ export default function HomeScreen({navigation}){
 
             {taskList.length > 0 && (
                 <View style={styles.taskBlock}>
-                    <Text style={styles.taskBlock.date}>Do by: {new Date(taskList[0].start).toLocaleTimeString("en-US")}</Text>
+                    <Text style={styles.taskBlock.date}>Do by: {new Date(taskList[0].start).toLocaleString("en-US")}</Text>
                     <Text style={styles.taskBlock.title}>{taskList[0].name}</Text>
                     <Text style={styles.taskBlock.description}>{taskList[0].description}</Text>
                     <Pressable>

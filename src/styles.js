@@ -186,6 +186,47 @@ export const styles = StyleSheet.create({
         right: 20,
         top: 15
     },
+	
+	scrollSelect: {
+		titleContainer: {
+			display: "flex",
+			flexDirection: "row",
+			justifyContent: "center",
+		},
+		title: {
+		    	fontSize: 16,
+		    	fontWeight: 'light',
+		    	fontFamily: "comfortaa",
+			color: '#C77DFF',
+		},
+		slider: {
+			backgroundColor: "#000000",
+			color: "#ffffff"
+		},
+		backgroundColor: "#240046",
+		boxShadow: '0 1px 6px 0 rgba(224, 170, 255, 0.17) inset',
+		borderRadius: 25,
+		padding: 20,
+		margin: 5,
+		width: '100%',
+		maxWidth: 400
+	},
+	timeSelect: {
+		text: {
+			fontSize: 16,
+			fontWeight: 'light',
+			fontFamily: "comfortaa",
+			color: '#C77DFF',
+			margin: 10,
+		},
+		backgroundColor: '#251064',
+		borderRadius: 25,
+		padding: 20,
+		alignItems: "center",
+		width: '100%',
+		maxWidth: 400
+
+	},
 
     calenderStyles: {
 	    isMobile: false,

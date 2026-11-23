@@ -41,7 +41,7 @@ export default function AgendaScreen({navigation}) {
                 keyExtractor={item => item.id}
                 renderItem={({item}) => (
                     <View style={styles.taskBlock}>
-                        <Text style={styles.taskBlock.date}>Do by: {new Date(item.start).toLocaleTimeString("en-US")}</Text>
+                        <Text style={styles.taskBlock.date}>Do by: {new Date(item.start).toLocaleString("en-US")}</Text>
                         <Text style={styles.taskBlock.title}>{item.name}</Text>
                         <Text style={styles.taskBlock.description}>{item.description}</Text>
                         <Pressable>
