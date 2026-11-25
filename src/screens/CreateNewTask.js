@@ -6,6 +6,8 @@ import { collection, doc, getDocs, setDoc, Timestamp } from "firebase/firestore"
 import { firestoreDB } from "../firebaseConfig";
 import { Task } from "../modules/Task"
 import { Host, Slider, Column } from "@expo/ui"
+import { InteractivePressable } from "../modules/InteractivePressable";
+import { NavMenu } from "../modules/navMenu"
 
 // Uploads inputed task to firestore database
 async function UploadTask(newTask) {
@@ -112,12 +114,12 @@ export default function CreateNewTask({navigation}){
 	    	value={taskMinute} onValueChange={setTaskMinute} min={0} max={59} step={1}
 	    />
 	    </View>
-            <Pressable
+            <InteractivePressable
                 style={styles.button}
                 onPress={() => setNewTask(new Task(taskName, taskDescription, undefined, new Date(taskYear, taskMonth, taskDay, taskHour, taskMinute).getTime()))}
-            >
-                <Text style={styles.button.text}>Create New Task</Text>
-            </Pressable>
+                text={"Create New Task"}
+            />
+            <NavMenu navigation={navigation}/>
         </SafeAreaView>
     )
 }

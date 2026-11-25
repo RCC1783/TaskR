@@ -78,7 +78,7 @@ export const styles = StyleSheet.create({
             textAlign: 'center',
             color: '#ffff',
         },
-	    hover: {
+	hover: {
             backgroundColor: '#9D4EDD'
 	    },
         pressed: {
@@ -87,7 +87,7 @@ export const styles = StyleSheet.create({
         },
 
         backgroundColor: '#7B2CBF',
-	    transition: 'background-color 0.25s',
+	transition: 'background-color 0.25s',
 
         shadowOpacity: 0.15,
         shadowRadius: 5,
@@ -154,23 +154,37 @@ export const styles = StyleSheet.create({
     },
 
     navMenu: {
-        text: {
-            fontSize: 14,
-            fontFamily: "comfortaa",
-            fontWeight: 'bold',
-	        color: "#fff",
-        },
+	button: {
+		text: {
+		    fontSize: 14,
+		    fontFamily: "comfortaa",
+		    fontWeight: 'bold',
+		    color: "#fff",
+		},
+		hover: {
+		    backgroundColor: "rgba(51, 33, 67, 0.95)",
+		    },
+		pressed: {
+		    backgroundColor: "rgba(35, 23, 55, 0.95)",
+		    transition: 'background-color 0s'
+		},
+		transition: 'background-color 0.25s',
+        	backgroundColor: "rgba(41, 26, 65, 0.95)",
+		paddingVertical: 8,
+		paddingHorizontal: "5%",
+		borderRadius: 16,
+	},
         flex: 1,
         flexDirection: 'row',
         justifyContent: 'space-evenly',
-        alignItems: 'center',
+	alignItems: 'center',
         
         backgroundColor: "rgba(41, 26, 65, 0.95)",
         borderRadius: 16,
         border: '1px solid rgba(244, 128, 255, 0.27)',
         
         paddingHorizontal: 45,
-        paddingVertical: 10,
+	paddingVertical: 2,
         borderRadius: 25,
 
         boxShadow: '1px 2px 1.5px 0 rgba(231, 179, 255, 0.25) inset, 0 1px 5px 0 rgba(0, 0, 0, 0.15)',
