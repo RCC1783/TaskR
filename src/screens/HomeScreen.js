@@ -73,7 +73,7 @@ export default function HomeScreen({navigation}){
             
             <View style={styles.hr}/>
 
-	        <Calender/>
+	        <Calender taskList={taskList}/>
 
             <NavMenu navigation={navigation}/>
         </SafeAreaView>

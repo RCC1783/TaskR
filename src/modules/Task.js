@@ -46,18 +46,16 @@ export function CalenderTask({task, dynamicStyle}) {
 	</Pressable>
 	);
 }
-export function insertTasksForDayAndHour(dayDelta, stamp, dynamicStyle) {
+export function insertTasksForDayAndHour(dayDelta, stamp, dynamicStyle, taskList) {
 	const tasksNow = [];
 	const unixTimeDayDelta = Date.UTC(2000, 0, 2, 0, 0) - Date.UTC(2000, 0, 1, 0, 0);
 	const unixTimeHourDelta = Date.UTC(2000, 0, 2, 2, 0) - Date.UTC(2000, 0, 2, 1, 0);
 	const taskBlockTimeStamp = stamp + dayDelta * unixTimeDayDelta;
 	// tasks array will probably be sorted, algorithm will change
-	for (let i=0; i<tasks.length; i++) {
-		const timeDiffStart = Math.abs(tasks[i].start - taskBlockTimeStamp)
-		const timeDiffEnd = (tasks[i].end + unixTimeHourDelta - taskBlockTimeStamp)
-		if ((tasks[i].start >= taskBlockTimeStamp && tasks[i].start < taskBlockTimeStamp + unixTimeHourDelta)) {
+	for (let i=0; i<taskList.length; i+=1) {
+		if ((taskList[i].start >= taskBlockTimeStamp && taskList[i].start < taskBlockTimeStamp + unixTimeHourDelta)) {
 			tasksNow.push(
-				<CalenderTask dynamicStyle={dynamicStyle} key={i} task={tasks[i]}/>	
+				<CalenderTask dynamicStyle={dynamicStyle} key={i} task={taskList[i]}/>	
 			);
 		}
 	}

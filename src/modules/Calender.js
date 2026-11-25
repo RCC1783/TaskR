@@ -9,9 +9,9 @@ function TimeStamp({time, children, nextDay, current, dynamicStyle}) {
 		</View>
 	);
 }
-function TaskContainer({curDay, day, stamp, dynamicStyle}) {
+function TaskContainer({taskList, curDay, day, stamp, dynamicStyle}) {
 	const curDayStyle = (curDay === day) ? dynamicStyle.calender.taskContainer.curDay : 0;
-	const tasks = insertTasksForDayAndHour(day-curDay, stamp, dynamicStyle);
+	const tasks = insertTasksForDayAndHour(day-curDay, stamp, dynamicStyle, taskList);
 	const shrinkPadding = (tasks.length != 0) ? {paddingTop: 0, paddingBottom: 0} : 0;
 	return (
 		<View style={[dynamicStyle.calender.taskContainer, curDayStyle, shrinkPadding]}>
@@ -31,7 +31,7 @@ function CalenderHeader({curDay, days, dynamicStyle}) {
 	);
 }
 
-export function Calender() {
+export function Calender({taskList}) {
 	const surveyWidth = Dimensions.get("window").width <= 767;
 	const dynamicStyle = surveyWidth ? styles.mobileCalenderStyles : styles.calenderStyles;
 	const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
@@ -64,7 +64,7 @@ export function Calender() {
 			nextDay={(ot==23) ? dynamicStyle.calender.daySeperator : {}} 
 			current={(ot==curHour) ? dynamicStyle.calender.currentTime : {}}
 			time={t+":00 "+suffix}
-			children={days.map((day, index) =>{return (<TaskContainer dynamicStyle={dynamicStyle} key={index} stamp={timeStampUnixTimeDate} day={index} curDay={curDay}/>)})}
+			children={days.map((day, index) =>{return (<TaskContainer taskList={taskList} dynamicStyle={dynamicStyle} key={index} stamp={timeStampUnixTimeDate} day={index} curDay={curDay}/>)})}
 			/>));
 		timeStampUnixTimeDate += unixTimeHourDelta;
 	}
