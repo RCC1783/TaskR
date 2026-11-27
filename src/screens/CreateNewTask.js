@@ -1,4 +1,4 @@
-import { Text, View, Pressable, FlatList, TextInput, } from "react-native";
+import { Text, View, Pressable, FlatList, TextInput, ScrollView, Switch, } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { styles } from "../styles";
 import { useState, useEffect } from "react";
@@ -8,6 +8,7 @@ import { Task } from "../modules/Task"
 import { Host, Slider, Column } from "@expo/ui"
 import { InteractivePressable } from "../modules/InteractivePressable";
 import { NavMenu } from "../modules/navMenu"
+import { scheduleTaskReminder } from "../modules/Reminders";
 
 // Uploads inputed task to firestore database
 async function UploadTask(newTask) {
@@ -33,6 +34,10 @@ function timeSelect(hour, minute) {
 	}
 	minute = (minute < 10) ? "0"+minute : minute;
 	return hour+":"+minute+morn;
+}
+
+function reminderStringify(days, hours, minutes) {
+	return Math.round(days)+"d "+Math.round(hours)+"h "+Math.round(minutes)+"m before due";
 }
 
 function ScrollSelect({name, parse, value, onValueChange, min, max, step, hideView=true}) {
@@ -61,24 +66,32 @@ export default function CreateNewTask({navigation}){
 	const [taskDay, setTaskDay] = useState(d.getDate());
 	const [taskHour, setTaskHour] = useState(d.getHours());
 	const [taskMinute, setTaskMinute] = useState(d.getMinutes());
+	const [reminderOn, setReminderOn] = useState(false);
+	const [reminderDays, setReminderDays] = useState(0);
+	const [reminderHours, setReminderHours] = useState(1);
+	const [reminderMins, setReminderMins] = useState(0);
 
     useEffect(() => {
         if(newTask == null) return;
         UploadTask(newTask);
+        scheduleTaskReminder(newTask);
         navigation.goBack();
     }, [newTask])
 
     return(
         <SafeAreaView style={styles.viewportContainer}>
             <Text style={styles.h1}>Create New Task</Text>
+            <ScrollView style={{flex: 1}} contentContainerStyle={{gap: 10}}>
             <TextInput
-                style={styles.textInput}
+                style={[styles.textInput, {color: "#ffffff"}]}
+                placeholderTextColor={styles.textInput.placeholder.colour}
                 placeholder="Task Name"
                 value={taskName}
                 onChangeText={setTaskName}
             />
             <TextInput
-                style={styles.textInput}
+                style={[styles.textInput, {color: "#ffffff"}]}
+                placeholderTextColor={styles.textInput.placeholder.colour}
                 placeholder="Description"
                 value={taskDescription}
                 onChangeText={setTaskDescription}
@@ -86,7 +99,8 @@ export default function CreateNewTask({navigation}){
 	    <View style={styles.timeSelect}>
 	    <Text style={styles.timeSelect.text}>{"Time: "+monthStringify(taskMonth)+" "+taskDay+", "+taskYear+" at "+timeSelect(taskHour, taskMinute)}</Text>
 	    <TextInput
-		style={styles.textInput}
+		style={[styles.textInput, {color: "#ffffff"}]}
+		placeholderTextColor={styles.textInput.placeholder.colour}
 	    	placeholder="Year"
 	    	value={taskYear}
 	    	onChangeText={setTaskYear}
@@ -114,11 +128,43 @@ export default function CreateNewTask({navigation}){
 	    	value={taskMinute} onValueChange={setTaskMinute} min={0} max={59} step={1}
 	    />
 	    </View>
+	    <View style={styles.timeSelect}>
+	    <View style={styles.reminderHeader}>
+	    <Text style={styles.timeSelect.text}>Reminder</Text>
+	    <Switch
+		value={reminderOn}
+		onValueChange={setReminderOn}
+		trackColor={{false: "#240046", true: "#7B2CBF"}}
+		thumbColor={"#E0AAFF"}
+	    />
+	    </View>
+	    {reminderOn && (
+	    <>
+	    <Text style={styles.timeSelect.text}>{reminderStringify(reminderDays, reminderHours, reminderMins)}</Text>
+	    <ScrollSelect
+		name={"Days"}
+	    	parse={(days) =>{return days;}}
+	    	value={reminderDays} onValueChange={setReminderDays} min={0} max={30} step={1}
+	    />
+	    <ScrollSelect
+		name={"Hours"}
+	    	parse={(hours) =>{return hours;}}
+	    	value={reminderHours} onValueChange={setReminderHours} min={0} max={23} step={1}
+	    />
+	    <ScrollSelect
+		name={"Minutes"}
+	    	parse={(minutes) =>{return minutes;}}
+	    	value={reminderMins} onValueChange={setReminderMins} min={0} max={59} step={1}
+	    />
+	    </>
+	    )}
+	    </View>
             <InteractivePressable
                 style={styles.button}
-                onPress={() => setNewTask(new Task(taskName, taskDescription, undefined, new Date(taskYear, taskMonth, taskDay, taskHour, taskMinute).getTime()))}
+                onPress={() => setNewTask(new Task(taskName, taskDescription, undefined, new Date(taskYear, taskMonth, taskDay, taskHour, taskMinute).getTime(), undefined, undefined, reminderOn ? Math.round(reminderDays) * 1440 + Math.round(reminderHours) * 60 + Math.round(reminderMins) : -1))}
                 text={"Create New Task"}
             />
+            </ScrollView>
             <NavMenu navigation={navigation}/>
         </SafeAreaView>
     )

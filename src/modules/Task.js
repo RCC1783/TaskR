@@ -19,13 +19,15 @@ export class Task {
 	start;
 	end;
 	taskStatus;
-	constructor(name='',description='No description provided', type=TaskType.REMINDER, start=Date.now(), end=-1, taskStatus=TaskStatus.INCOMPLETE) {
+	reminderMinutes;
+	constructor(name='',description='No description provided', type=TaskType.REMINDER, start=Date.now(), end=-1, taskStatus=TaskStatus.INCOMPLETE, reminderMinutes=-1) {
 		this.name=name;
 		this.description=description;
 		this.type = type;
 		this.start = start;
 		this.end = end;
 		this.taskStatus = taskStatus;
+		this.reminderMinutes = reminderMinutes;
 	}
 }
 const tasks = [

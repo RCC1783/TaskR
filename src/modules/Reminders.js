@@ -1,25 +1,42 @@
-import { useEffect, useRef } from "react";
-import { Platform } from "react-native";
+import { useEffect } from "react";
+import { AppState, Platform } from "react-native";
 import * as Notifications from "expo-notifications";
-
-let channelReady = false;
+import { GetTasks } from "../screens/HomeScreen";
 
 const CHANNEL_ID = "reminders";
+const ID_PREFIX = "reminder-";
 
-Notifications.setNotificationHandler({
-    handleNotification: async () => ({
-        shouldShowBanner: true,
-        shouldShowList: true,
-        shouldPlaySound: true,
-        shouldSetBadge: false,
-    }),
-});
+const MAX_SCHEDULED = 60;
+const MAX_TIMEOUT = 2147483647;
 
-export function shouldSendReminder(date){
-    return true;
+let channelReady = false;
+let queue = Promise.resolve();
+let webTimers = {};
+
+if(Platform.OS !== "web"){
+    Notifications.setNotificationHandler({
+        handleNotification: async () => ({
+            shouldShowBanner: true,
+            shouldShowList: true,
+            shouldPlaySound: true,
+            shouldSetBadge: false,
+        }),
+    });
 }
 
-async function requestPermission(){
+function getReminderTime(task){
+    if(typeof task.reminderMinutes !== "number" || task.reminderMinutes < 0){
+        return null;
+    }
+
+    return task.start - task.reminderMinutes * 60000;
+}
+
+function getReminderId(task){
+    return ID_PREFIX + task.start + "-" + task.name;
+}
+
+async function requestNativePermission(){
     if(Platform.OS === "android"){
         try{
             await Notifications.setNotificationChannelAsync(CHANNEL_ID, {
@@ -45,49 +62,162 @@ async function requestPermission(){
     return requested.granted;
 }
 
-async function sendReminder(date){
-    const time = date.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
+async function requestWebPermission(){
+    if(typeof Notification === "undefined"){
+        return false;
+    }
+
+    try{
+        if(Notification.permission === "default"){
+            await Notification.requestPermission();
+        }
+    }
+    catch(error){
+        console.warn(error);
+    }
+
+    return Notification.permission === "granted";
+}
+
+function requestPermission(){
+    return Platform.OS === "web" ? requestWebPermission() : requestNativePermission();
+}
+
+async function cancelReminders(){
+    if(Platform.OS === "web"){
+        Object.values(webTimers).forEach(clearTimeout);
+        webTimers = {};
+        return;
+    }
+
+    const pending = await Notifications.getAllScheduledNotificationsAsync();
+    const old = pending.filter((item) => item.identifier.startsWith(ID_PREFIX));
+    await Promise.all(old.map((item) => Notifications.cancelScheduledNotificationAsync(item.identifier)));
+}
+
+async function scheduleReminder(task){
+    const time = getReminderTime(task);
+    const delay = time - Date.now();
+
+    if(time === null || delay <= 0){
+        return;
+    }
+
+    const body = task.name + " is due soon!";
+
+    if(Platform.OS === "web"){
+        const id = getReminderId(task);
+
+        if(delay > MAX_TIMEOUT){
+            return;
+        }
+
+        clearTimeout(webTimers[id]);
+        webTimers[id] = setTimeout(() => {
+            delete webTimers[id];
+
+            try{
+                new Notification("TaskR", { body: body });
+            }
+            catch(error){
+                console.warn(error);
+            }
+        }, delay);
+        return;
+    }
 
     await Notifications.scheduleNotificationAsync({
+        identifier: getReminderId(task),
         content: {
             title: "TaskR",
-            body: "It's " + time,
+            body: body,
         },
-        trigger: channelReady ? { channelId: CHANNEL_ID } : null,
+        trigger: {
+            type: Notifications.SchedulableTriggerInputTypes.DATE,
+            date: new Date(time),
+            ...(channelReady ? { channelId: CHANNEL_ID } : {}),
+        },
     });
 }
 
+async function syncReminders(){
+    await cancelReminders();
+
+    const tasks = await GetTasks();
+    const upcoming = tasks
+        .filter((task) => getReminderTime(task) > Date.now())
+        .sort((a, b) => getReminderTime(a) - getReminderTime(b))
+        .slice(0, MAX_SCHEDULED);
+
+    for(const task of upcoming){
+        await scheduleReminder(task);
+    }
+}
+
+async function cancelReminder(task){
+    const id = getReminderId(task);
+
+    if(Platform.OS === "web"){
+        clearTimeout(webTimers[id]);
+        delete webTimers[id];
+        return;
+    }
+
+    await Notifications.cancelScheduledNotificationAsync(id);
+}
+
+export function scheduleTaskReminder(task){
+    queue = queue.then(() => scheduleReminder(task)).catch(console.warn);
+    return queue;
+}
+
+export function cancelTaskReminder(task){
+    queue = queue.then(() => cancelReminder(task)).catch(console.warn);
+    return queue;
+}
+
+export function refreshReminders(){
+    queue = queue.then(syncReminders).catch(console.warn);
+    return queue;
+}
+
 export function Reminders(){
-    const lastSent = useRef(null);
-
     useEffect(() => {
-        let timer;
-        let cancelled = false;
         let allowed = false;
+        let cancelled = false;
 
-        const check = () => {
-            if(cancelled) return;
-
-            const now = new Date();
-            const minuteKey = now.getHours() + ":" + now.getMinutes();
-
-            if(allowed && shouldSendReminder(now) && lastSent.current !== minuteKey){
-                lastSent.current = minuteKey;
-                sendReminder(now).catch(console.warn);
+        const refresh = () => {
+            if(allowed && !cancelled){
+                refreshReminders();
             }
-
-            const untilNextMinute = 60000 - (now.getSeconds() * 1000 + now.getMilliseconds());
-            timer = setTimeout(check, untilNextMinute + 50);
         };
 
-        requestPermission().then((granted) => {
-            allowed = granted;
-            check();
+        const askAgain = () => {
+            requestPermission().then((granted) => {
+                allowed = granted;
+                refresh();
+            });
+        };
+
+        askAgain();
+
+        if(Platform.OS === "web"){
+            window.addEventListener("click", askAgain, { once: true });
+        }
+
+        const appStateListener = AppState.addEventListener("change", (state) => {
+            if(state === "active"){
+                refresh();
+            }
         });
 
         return () => {
             cancelled = true;
-            clearTimeout(timer);
+            appStateListener.remove();
+
+            if(Platform.OS === "web"){
+                window.removeEventListener("click", askAgain);
+            }
         };
     }, []);
 

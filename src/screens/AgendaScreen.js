@@ -7,8 +7,16 @@ import { styles } from "../styles";
 import { NavMenu } from "../modules/navMenu";
 import { useCallback, useEffect, useState } from "react";
 // import { collection, getDocs, Timestamp } from "firebase/firestore";
-// import { firestoreDB } from "../firebaseConfig";
+import { deleteDoc, doc } from "firebase/firestore";
+import { firestoreDB } from "../firebaseConfig";
 import { GetTasks } from "./HomeScreen";
+import { cancelTaskReminder } from "../modules/Reminders";
+
+// deletes a task from firebase
+async function DeleteTask(task) {
+    await deleteDoc(doc(firestoreDB, "test", task.id));
+    cancelTaskReminder(task);
+}
 
 // Screen to display all tasks chronologically from oldest to newest
 export default function AgendaScreen({navigation}) {
@@ -28,6 +36,12 @@ export default function AgendaScreen({navigation}) {
             })
         }, [taskList])
 
+        const removeTask = (task) => {
+            DeleteTask(task)
+                .then(() => setTaskList(taskList.filter((item) => item.id !== task.id)))
+                .catch(console.error);
+        }
+
     return(
         <SafeAreaView style={styles.viewportContainer}>
             <View style={[{height: 0}]}><View style={styles.devUserIcon}/></View>
@@ -44,9 +58,14 @@ export default function AgendaScreen({navigation}) {
                         <Text style={styles.taskBlock.date}>Do by: {new Date(item.start).toLocaleString("en-US")}</Text>
                         <Text style={styles.taskBlock.title}>{item.name}</Text>
                         <Text style={styles.taskBlock.description}>{item.description}</Text>
-                        <Pressable>
-                            <Text style={styles.taskBlock.editButton}>Edit</Text>
-                        </Pressable>
+                        <View style={styles.taskBlock.actions}>
+                            <Pressable>
+                                <Text style={[styles.taskBlock.editButton, {width: 'auto'}]}>Edit</Text>
+                            </Pressable>
+                            <Pressable onPress={() => removeTask(item)}>
+                                <Text style={styles.taskBlock.deleteButton}>Delete</Text>
+                            </Pressable>
+                        </View>
                     </View>
                 )}
             />

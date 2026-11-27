@@ -136,6 +136,17 @@ export const styles = StyleSheet.create({
             width: '100%',
             textAlign: 'right'
         },
+        deleteButton: {
+            fontSize: 12,
+            fontFamily: "comfortaa",
+            fontWeight: "bold",
+            color: "#FF5C5C",
+        },
+        actions: {
+            flexDirection: 'row',
+            justifyContent: 'flex-end',
+            gap: 15
+        },
 
 
         backgroundColor: 'rgba(54, 6, 91, 1)',
@@ -211,7 +222,7 @@ export const styles = StyleSheet.create({
 		    	fontSize: 16,
 		    	fontWeight: 'light',
 		    	fontFamily: "comfortaa",
-			color: '#C77DFF',
+			color: '#ffffff',
 		},
 		slider: {
 			backgroundColor: "#000000",
@@ -225,12 +236,18 @@ export const styles = StyleSheet.create({
 		width: '100%',
 		maxWidth: 400
 	},
+	reminderHeader: {
+		flexDirection: "row",
+		alignItems: "center",
+		justifyContent: "space-between",
+		width: "100%"
+	},
 	timeSelect: {
 		text: {
 			fontSize: 16,
 			fontWeight: 'light',
 			fontFamily: "comfortaa",
-			color: '#C77DFF',
+			color: '#ffffff',
 			margin: 10,
 		},
 		backgroundColor: '#251064',
